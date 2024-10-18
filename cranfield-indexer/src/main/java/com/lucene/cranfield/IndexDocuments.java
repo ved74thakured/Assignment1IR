@@ -14,17 +14,17 @@ import java.nio.file.Paths;
 
 public class IndexDocuments {
     public static void main(String[] args) throws Exception {
-        // Path to index and Cranfield collection
+        // Setting up the path
         String indexPath = "index";
         String cranfieldPath = "/opt/lucene_project/cran.all.1400";
 
-        // Set up analyzer and writer config
+        // Setting  up analyzer
         StandardAnalyzer analyzer = new StandardAnalyzer();
         FSDirectory dir = FSDirectory.open(Paths.get(indexPath));
         IndexWriterConfig iwc = new IndexWriterConfig(analyzer);
         IndexWriter writer = new IndexWriter(dir, iwc);
 
-        // Read and index Cranfield collection
+        // Reading  and indexing Cranfielcollection
         File cranfieldFile = new File(cranfieldPath);
         BufferedReader reader = new BufferedReader(new FileReader(cranfieldFile));
         String line;
@@ -32,10 +32,10 @@ public class IndexDocuments {
         int docId = 0;
 
         while ((line = reader.readLine()) != null) {
-            if (line.startsWith(".I")) {  // Document delimiter
+            if (line.startsWith(".I")) {  
                 if (docContent.length() > 0) {
                     indexDoc(writer, docContent.toString(), docId);
-                    docContent.setLength(0);  // Clear for next document
+                    docContent.setLength(0);  
                 }
                 docId++;
             } else {
@@ -43,7 +43,7 @@ public class IndexDocuments {
             }
         }
         
-        // Index the last document
+        
         if (docContent.length() > 0) {
             indexDoc(writer, docContent.toString(), docId);
         }
@@ -51,7 +51,7 @@ public class IndexDocuments {
         writer.close();
     }
 
-    // Helper method to index a document
+   
     static void indexDoc(IndexWriter writer, String content, int docId) throws Exception {
         Document doc = new Document();
         doc.add(new TextField("docId", String.valueOf(docId), TextField.Store.YES));
