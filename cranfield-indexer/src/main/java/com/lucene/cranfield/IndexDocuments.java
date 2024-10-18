@@ -18,13 +18,13 @@ public class IndexDocuments {
         String indexPath = "index";
         String cranfieldPath = "/opt/lucene_project/cran.all.1400";
 
-        // Setting  up analyzer
+        // Setting up analyzer
         StandardAnalyzer analyzer = new StandardAnalyzer();
         FSDirectory dir = FSDirectory.open(Paths.get(indexPath));
         IndexWriterConfig iwc = new IndexWriterConfig(analyzer);
         IndexWriter writer = new IndexWriter(dir, iwc);
 
-        // Reading  and indexing Cranfielcollection
+        // Reading and indexing Cranfield collection
         File cranfieldFile = new File(cranfieldPath);
         BufferedReader reader = new BufferedReader(new FileReader(cranfieldFile));
         String line;
@@ -32,18 +32,17 @@ public class IndexDocuments {
         int docId = 0;
 
         while ((line = reader.readLine()) != null) {
-            if (line.startsWith(".I")) {  
+            if (line.startsWith(".I")) {
                 if (docContent.length() > 0) {
                     indexDoc(writer, docContent.toString(), docId);
-                    docContent.setLength(0);  
+                    docContent.setLength(0);
                 }
                 docId++;
             } else {
                 docContent.append(line).append("\n");
             }
         }
-        
-        
+
         if (docContent.length() > 0) {
             indexDoc(writer, docContent.toString(), docId);
         }
@@ -51,7 +50,6 @@ public class IndexDocuments {
         writer.close();
     }
 
-   
     static void indexDoc(IndexWriter writer, String content, int docId) throws Exception {
         Document doc = new Document();
         doc.add(new TextField("docId", String.valueOf(docId), TextField.Store.YES));

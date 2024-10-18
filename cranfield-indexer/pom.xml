@@ -8,42 +8,37 @@
   <version>1.0-SNAPSHOT</version>
 
   <dependencies>
-    <!-- Lucene Core -->
+
     <dependency>
       <groupId>org.apache.lucene</groupId>
       <artifactId>lucene-core</artifactId>
       <version>9.12.0</version>
     </dependency>
 
-    <!-- Lucene Analyzers -->
     <dependency>
       <groupId>org.apache.lucene</groupId>
       <artifactId>lucene-analyzers-common</artifactId>
       <version>8.11.4</version>
     </dependency>
 
-    <!-- Lucene Miscellaneous -->
     <dependency>
       <groupId>org.apache.lucene</groupId>
       <artifactId>lucene-misc</artifactId>
       <version>9.12.0</version>
     </dependency>
 
-    <!-- Lucene Query Parser -->
     <dependency>
       <groupId>org.apache.lucene</groupId>
       <artifactId>lucene-queryparser</artifactId>
       <version>9.12.0</version>
     </dependency>
 
-    <!-- Lucene Backward Codecs for Compatibility -->
     <dependency>
       <groupId>org.apache.lucene</groupId>
       <artifactId>lucene-backward-codecs</artifactId>
       <version>9.12.0</version>
     </dependency>
 
-    <!-- JUnit 5 for Testing -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -57,12 +52,13 @@
       <version>5.7.1</version>
       <scope>test</scope>
     </dependency>
+
   </dependencies>
 
   <build>
     <plugins>
 
-      <!-- Compiler Plugin to Use Java 11 -->
+     
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -73,7 +69,7 @@
         </configuration>
       </plugin>
 
-      <!-- Surefire Plugin for Running Tests -->
+     
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -85,7 +81,7 @@
         </configuration>
       </plugin>
 
-      <!-- Maven JAR Plugin to Specify Main Class -->
+     
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
@@ -94,13 +90,13 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>com.lucene.cranfield.QueryCranfieldIndex</mainClass> <!-- Ensure this is correct -->
+              <mainClass>com.lucene.cranfield.QueryCranfieldIndex</mainClass>
             </manifest>
           </archive>
         </configuration>
       </plugin>
 
-      <!-- Shade Plugin to Create a Fat JAR (Includes All Dependencies) -->
+      
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
@@ -114,7 +110,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>com.lucene.cranfield.QueryCranfieldIndex</mainClass>  <!-- Your main class -->
+                  <mainClass>com.lucene.cranfield.QueryCranfieldIndex</mainClass>
                 </transformer>
               </transformers>
             </configuration>
