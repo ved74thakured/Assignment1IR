@@ -1,0 +1,4 @@
+com/lucene/cranfield/IndexDocuments.class
+com/lucene/cranfield/EvaluateTrecEval.class
+com/lucene/cranfield/App.class
+com/lucene/cranfield/QueryCranfieldIndex.class
